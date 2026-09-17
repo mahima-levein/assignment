@@ -1,4 +1,5 @@
 const express = require("express");
+const { validateTask } = require("./src/validators");
 
 const app = express();
 
@@ -11,9 +12,17 @@ app.get("/tasks", (req, res) => {
 });
 
 app.post("/tasks", (req, res) => {
+  let validated;
+
+  try {
+    validated = validateTask(req.body);
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+
   const task = {
     id: tasks.length + 1,
-    ...req.body
+    ...validated
   };
 
   tasks.push(task);
