@@ -35,3 +35,4 @@ npm run lint
 
 - Never edit package-lock.json manually.
 - Never commit secrets.
+- Never edit tests to make them pass unless asked.
