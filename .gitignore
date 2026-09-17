@@ -21,3 +21,4 @@ dist-ssr
 .idea
 
 .claude/settings.local.json
+coverage*
