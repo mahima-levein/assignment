@@ -3,7 +3,13 @@ const VALID_PRIORITIES = ["low", "medium", "high"];
 function validateTask(input) {
   const { title, priority = "medium" } = input;
 
-  if (!title || title.length < 3 || title.length > 100) {
+  if (typeof title !== "string") {
+    throw new Error("Invalid title");
+  }
+
+  const trimmedTitle = title.trim();
+
+  if (trimmedTitle.length < 3 || trimmedTitle.length > 100) {
     throw new Error("Invalid title");
   }
 
@@ -11,7 +17,7 @@ function validateTask(input) {
     throw new Error("Invalid priority");
   }
 
-  return { title, priority };
+  return { title: trimmedTitle, priority };
 }
 
 module.exports = { validateTask };

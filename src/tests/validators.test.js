@@ -48,4 +48,21 @@ describe("validateTask", () => {
     });
     expect(result.priority).toBe("medium");
   });
+
+  test("rejects a non-string title", () => {
+    expect(() => {
+      validateTask({ title: 12345 });
+    }).toThrow();
+  });
+
+  test("rejects a whitespace-only title", () => {
+    expect(() => {
+      validateTask({ title: "     " });
+    }).toThrow();
+  });
+
+  test("trims surrounding whitespace from a valid title", () => {
+    const result = validateTask({ title: "  Complete assignment  " });
+    expect(result.title).toBe("Complete assignment");
+  });
 });
